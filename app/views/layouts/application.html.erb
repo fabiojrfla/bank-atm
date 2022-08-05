@@ -8,16 +8,24 @@
 
     <%= stylesheet_link_tag "application" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <%= favicon_link_tag asset_path('favicon.png') %>
   </head>
 
-  <body>
-    <header>
-      <nav>
-        <h1>Caixa Eletrônico</h1>
+  <body class="d-flex flex-column min-vh-100">
+    <header class="sticky-top shadow-sm">
+      <nav class="navbar bg-primary bg-gradient d-flex justify-content-center">
+        <h1 class="navbar-brand fw-bolder display-5 text-white">Caixa Eletrônico</h1>
       </nav>
     </header>
-    <main>
-      <%= yield %>
+    <main class="container mb-5">
+      <div class="yeld mt-4">
+        <%= yield %>
+      </div>
     </main>
+    <footer class="mt-auto bg-primary bg-gradient">
+      <div class="py-0 my-4">
+       <p class="text-center text-white fs-6">&copy; 2022 Bank ATM</p>
+      </div>
+    </footer>
   </body>
 </html>
