@@ -22,7 +22,7 @@ class Client < ApplicationRecord
   private
 
   def age_over_18_years
-    return unless birth_date && birth_date >= 18.years.ago.to_date
+    return unless birth_date && birth_date > 18.years.ago.to_date
 
     errors.add(:birth_date, :must_be_18_years)
   end

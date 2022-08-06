@@ -24,15 +24,15 @@ RSpec.describe Client, type: :model do
 
     context 'custom' do
       it 'valid if the client is over 18 years' do
-        client = build(:client, birth_date: 18.years.ago)
+        client = build(:client, birth_date: 18.years.ago.to_date)
         client.valid?
         expect(client.errors[:birth_date]).to be_empty
       end
 
       it 'invalid if the client is under 18 years of age' do
-        client = build(:client, birth_date: 17.years.ago)
+        client = build(:client, birth_date: 17.years.ago.to_date)
         client.valid?
-        expect(client.errors[:birth_date]).to include('Você precisa ter 18 anos ou mais.')
+        expect(client.errors[:birth_date]).to include('você precisa ter 18 anos ou mais.')
       end
     end
   end
