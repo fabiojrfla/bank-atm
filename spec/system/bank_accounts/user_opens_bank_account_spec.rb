@@ -23,7 +23,7 @@ describe 'User opens bank account' do
 
   it 'successfully' do
     visit new_client_registration_path
-    fill_in 'CPF', with: '123456789-10'
+    fill_in 'CPF', with: '12345678910'
     fill_in 'Nome', with: 'José'
     fill_in 'Sobrenome', with: 'da Silva'
     fill_in 'Data de nascimento', with: '06/08/1992'
@@ -38,6 +38,26 @@ describe 'User opens bank account' do
     expect(page).to have_content 'Olá José'
     expect(page).to have_content 'Agência:'
     expect(page).to have_content 'Conta:'
+  end
+
+  it 'with incomplete parameters' do
+    visit new_client_registration_path
+    fill_in 'CPF', with: ''
+    fill_in 'Nome', with: 'José'
+    fill_in 'Sobrenome', with: ''
+    fill_in 'Data de nascimento', with: '06/08/1992'
+    fill_in 'E-mail', with: ''
+    fill_in 'Senha', with: '123456'
+    fill_in 'Confirme sua senha', with: '123456'
+    click_on 'Abrir conta'
+
+    expect(current_path).not_to eq root_path
+    expect(page).to have_content 'Não foi possível salvar cliente'
+    expect(page).to have_content 'CPF não pode ficar em branco'
+    expect(page).to have_content 'Sobrenome não pode ficar em branco'
+    expect(page).to have_content 'E-mail não pode ficar em branco'
+    expect(page).to have_field 'Nome', with: 'José'
+    expect(page).to have_field 'Data de nascimento', with: '1992-08-06'
   end
 end
 
