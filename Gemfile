@@ -3,7 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.1.2"
 
-gem 'simplecov', require: false, group: :test
+gem 'devise'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.3", ">= 7.0.3.1"
@@ -47,6 +47,7 @@ group :development, :test do
   gem 'erb_lint', require: false
   gem 'rspec-rails'
   gem 'capybara'
+  gem "factory_bot_rails"
 end
 
 group :development do
@@ -60,3 +61,7 @@ group :development do
   # gem "spring"
 end
 
+group :test do
+  gem 'simplecov', require: false
+  gem 'shoulda-matchers'
+end
