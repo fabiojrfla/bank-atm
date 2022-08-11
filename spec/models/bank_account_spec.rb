@@ -27,18 +27,11 @@ RSpec.describe BankAccount, type: :model do
   end
 
   describe 'methods' do
-    context '#generate_agency_number' do
+    context '#generate_agency_and_account_numbers' do
       it 'Generates a bank agency number when creating a new object' do
         bank_account = BankAccount.new
         bank_account.valid?
         expect(bank_account.agency_number).not_to be_nil
-      end
-    end
-
-    context '#generate_account_number' do
-      it 'Generates a bank account number when creating a new object' do
-        bank_account = BankAccount.new
-        bank_account.valid?
         expect(bank_account.account_number).not_to be_nil
       end
     end
