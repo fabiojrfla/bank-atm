@@ -13,7 +13,7 @@ class Client < ApplicationRecord
   validates :registration_number, length: { is: 11 }
   validate :age_over_18_years
 
-  before_create :set_bank_account
+  after_create :set_bank_account
 
   def email_required?
     false
@@ -36,6 +36,6 @@ class Client < ApplicationRecord
   end
 
   def set_bank_account
-    self.bank_account = BankAccount.create
+    self.bank_account ||= BankAccount.create
   end
 end

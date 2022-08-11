@@ -3,6 +3,6 @@ FactoryBot.define do
     status { 'active' }
     agency_number { 1234 }
     account_number { 1234567 }
-    association(:client)
+    association :client
   end
 end
