@@ -9,7 +9,7 @@ class Client < ApplicationRecord
   validates :email, uniqueness: true
   validates :registration_number, uniqueness: true
   validates :registration_number, :name, :surname, :birth_date, :email, presence: true
-  validates :registration_number, numericality: true
+  validates :registration_number, numericality: { only_integer: true }
   validates :registration_number, length: { is: 11 }
   validate :age_over_18_years
 
