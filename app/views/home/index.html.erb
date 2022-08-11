@@ -1,7 +1,7 @@
 <section>
   <% if client_signed_in? %>
   <div class="d-flex flex-row justify-content-between">
-    <p>Olá <%= current_client.name %> | Agência: Conta:</p>
+    <p>Olá <%= current_client.name %> | <%= current_client.bank_account_description %> </p>
     <%= button_to 'Sair', destroy_client_session_path, method: :delete, class: 'btn btn-outline-danger' %>
   </div>
   <% end %>

@@ -22,6 +22,9 @@ describe 'User opens bank account' do
   end
 
   it 'successfully' do
+    allow(SecureRandom).to receive(:random_number).with(9999).and_return(1234)
+    allow(SecureRandom).to receive(:random_number).with(9999999).and_return(1234567)
+
     visit new_client_registration_path
     fill_in 'CPF', with: '12345678910'
     fill_in 'Nome', with: 'José'
@@ -36,8 +39,8 @@ describe 'User opens bank account' do
     expect(page).not_to have_content 'Abrir conta'
     expect(page).to have_content 'Bem vindo! Conta aberta com sucesso.'
     expect(page).to have_content 'Olá José'
-    expect(page).to have_content 'Agência:'
-    expect(page).to have_content 'Conta:'
+    expect(page).to have_content 'Agência: 1234'
+    expect(page).to have_content 'Conta: 123456-7'
   end
 
   it 'with incomplete parameters' do
@@ -60,4 +63,3 @@ describe 'User opens bank account' do
     expect(page).to have_field 'Data de nascimento', with: '1992-08-06'
   end
 end
-
