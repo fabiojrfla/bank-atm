@@ -1,6 +1,6 @@
 <div class="links d-flex justify-content-center flex-column mt-2">
   <%- if controller_name != 'sessions' %>
-    <%= link_to "Log in", new_session_path(resource_name), class:"text-primary text-decoration-none fw-bolder" %><br />
+    <%= link_to "Sou cliente", new_session_path(resource_name), class:"text-primary text-decoration-none fw-bolder" %><br />
   <% end %>
 
   <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
