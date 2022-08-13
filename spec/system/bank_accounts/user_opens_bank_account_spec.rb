@@ -46,9 +46,9 @@ describe 'User opens bank account' do
   it 'with incomplete parameters' do
     visit new_client_registration_path
     fill_in 'CPF', with: ''
+    fill_in 'Data de nascimento', with: '06/08/1992'
     fill_in 'Nome', with: 'José'
     fill_in 'Sobrenome', with: ''
-    fill_in 'Data de nascimento', with: '06/08/1992'
     fill_in 'E-mail', with: ''
     fill_in 'Senha', with: '123456'
     fill_in 'Confirme sua senha', with: '123456'

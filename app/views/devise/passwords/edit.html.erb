@@ -10,7 +10,7 @@
         <%= f.password_field :password, autofocus: true, autocomplete: "new-password", class: 'form-control', placeholder: ' ' %>
         <%= f.label :password, "Nova senha" %><br />
         <% if @minimum_password_length %>
-        <em>(<%= @minimum_password_length %> caracteres no mínimo)</em><br />
+          <em>(<%= @minimum_password_length %> caracteres no mínimo)</em><br />
         <% end %>
       </div>
 
