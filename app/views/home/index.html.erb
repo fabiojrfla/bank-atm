@@ -4,6 +4,10 @@
       <p>Olá <%= current_client.name %> | <%= current_client.bank_account_description %> </p>
       <%= button_to 'Sair', destroy_client_session_path, method: :delete, class: 'btn btn-outline-danger' %>
     </div>
+
+    <div class="d-flex align-self-center justify-content-center">
+      <%= link_to 'Editar seus dados', edit_client_registration_path, class: "btn btn-outline-primary py-2 m-1 w-50" %>
+    </div>
   <% end %>
   <h2>Selecione uma opção:</h2>
   <% unless client_signed_in? %>
