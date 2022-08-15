@@ -1,26 +1,22 @@
 <section>
-  <% if client_signed_in? %>
-    <div class="d-flex flex-row justify-content-between">
-      <p>Olá <%= current_client.name %> | <%= current_client.bank_account_description %> </p>
-      <%= button_to 'Sair', destroy_client_session_path, method: :delete, class: 'btn btn-outline-danger' %>
-    </div>
-    <h2 class="mb-4">Selecione uma opção:</h2>
-    <div class="row g-2">
-      <div class="col-lg-6">
-        <%= link_to 'Editar seus dados', edit_client_registration_path, class: 'btn btn-outline-primary py-2 w-100' %>
-      </div>
-    </div>
+  <% if client_signed_in? && current_client.bank_account.active? %>
+
+    <%= render 'homepage_options_logged_in' %>
+
+  <% elsif client_signed_in? && current_client.bank_account.closed? %>
+
+    <%= render 'homepage_options_bank_account_closed' %>
 
   <% else %>
-    <h2 class="mb-4">Selecione uma opção:</h2>
-    <div class="row g-2">
-      <div class="col-lg-6">
-        <%= link_to 'Sou cliente', new_client_session_path, class: 'btn btn-outline-primary py-2 w-100' %>
-      </div>
 
-      <div class="col-lg-6">
-        <%= link_to 'Abrir conta', new_client_registration_path, class: 'btn btn-outline-primary py-2 w-100' %>
-      </div>
-    </div>
+    <%= render 'homepage_options_logged_out' %>
+
   <% end %>
 </section>
+<script>
+  function confirmDestroy(message) {
+    if (!confirm(message)) {
+      return false;
+    }
+  }
+</script>

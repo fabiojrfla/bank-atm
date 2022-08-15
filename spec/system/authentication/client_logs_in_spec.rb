@@ -16,7 +16,7 @@ describe 'Client logs in' do
     end
   end
 
-  it 'sucessfully' do
+  it 'successfully' do
     create(:client, name: 'José')
 
     visit root_path
