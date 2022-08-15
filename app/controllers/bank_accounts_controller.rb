@@ -1,4 +1,6 @@
 class BankAccountsController < ApplicationController
+  before_action :authenticate_client!
+
   def destroy
     @bank_account = BankAccount.find(params[:id])
     if @bank_account.closed!
