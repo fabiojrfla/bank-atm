@@ -3,11 +3,7 @@ class Credit < ApplicationRecord
 
   enum credit_type: { deposit: 5 }
 
-  before_create :integer_to_cents
+  validates :amount, presence: true
+  validates :amount, numericality: { greater_than_or_equal_to: 2 }
 
-  private
-
-  def integer_to_cents
-    self.amount *= 100
-  end
 end
