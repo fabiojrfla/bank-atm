@@ -10,6 +10,10 @@ class BankAccount < ApplicationRecord
 
   before_validation :generate_agency_and_account_numbers, on: :create
 
+  def real_balance
+    self.balance.to_d / 100
+  end
+
   private
 
   def generate_agency_and_account_numbers

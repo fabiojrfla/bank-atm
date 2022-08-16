@@ -35,5 +35,13 @@ RSpec.describe BankAccount, type: :model do
         expect(bank_account.account_number).not_to be_nil
       end
     end
+
+    context '#real_balance' do
+      it 'Converts balance in cents to balance in integers' do
+        bank_account = build(:bank_account)
+        bank_account.balance = 100_000
+        expect(bank_account.real_balance).to eq 1_000
+      end
+    end
   end
 end
