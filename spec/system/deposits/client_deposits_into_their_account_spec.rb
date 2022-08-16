@@ -25,7 +25,7 @@ describe 'Client deposits into their bank account' do
     click_on 'Depositar'
 
     expect(page).to have_content 'Não foi possível realizar o depósito'
-    expect(page).to have_content 'Valor R$ deve ser maior ou igual a 2'
+    expect(page).to have_content 'Valor R$ deve ser maior ou igual a R$ 2'
     expect(page).to have_content 'Seu saldo: R$ 0,00'
   end
 end

@@ -15,7 +15,10 @@ RSpec.describe Credit, type: :model do
     end
 
     context 'numericality' do
-      it { should validate_numericality_of(:amount).is_greater_than_or_equal_to(2) }
+      it do
+        should validate_numericality_of(:amount).is_greater_than_or_equal_to(200)
+                                                .with_message('deve ser maior ou igual a R$ 2')
+      end
     end
   end
 end
