@@ -8,7 +8,7 @@ class BankCreditMaker < ApplicationService
 
   def call
     return unless @credit_amount
-    
+
     @destination_bank_account.balance += @credit_amount
     @destination_bank_account.save!
   end

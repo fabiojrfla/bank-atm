@@ -1,14 +1,15 @@
 class DepositsController < ApplicationController
-  before_action :bank_account, :amount, only: %i[create]
+  before_action :authenticate_client!
 
   def new
-    @deposit = Credit.new()
+    @deposit = Credit.new
   end
 
   def create
-    @deposit = Credit.new(credit_type: 'deposit', amount: amount, bank_account: bank_account)
+    @deposit = Credit.new(credit_type: 'deposit', amount: integer_amount_to_cents,
+                          bank_account: current_client.bank_account)
     if @deposit.save
-      BankCreditMaker.call(bank_account, @deposit.amount)
+      BankCreditMaker.call(@deposit.bank_account, @deposit.amount)
       flash[:success] = 'Depósito realizado com sucesso.'
       redirect_to new_deposit_path
     else
@@ -20,12 +21,11 @@ class DepositsController < ApplicationController
 
   private
 
-  def amount
-    credit_params = params.require(:credit).permit(:amount)
-    credit_params[:amount].to_d * 100
+  def credit_params
+    params.require(:credit).permit(:amount)
   end
 
-  def bank_account
-    current_client.bank_account
+  def integer_amount_to_cents
+    credit_params[:amount].to_d * 100
   end
 end
