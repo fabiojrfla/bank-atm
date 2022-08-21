@@ -1,5 +1,6 @@
 class BankAccountsController < ApplicationController
-  before_action :authenticate_client!, :set_bank_account
+  before_action :authenticate_client!
+  before_action :set_bank_account, only: %i[destroy reactivate]
 
   def destroy
     if @bank_account.closed!
@@ -19,10 +20,12 @@ class BankAccountsController < ApplicationController
     redirect_to root_path
   end
 
+  def balance; end
+
   private
 
   def bank_account_id
-    params[:id] || params[:close_bank_account_id]
+    params[:id] || params[:bank_account_id]
   end
 
   def set_bank_account

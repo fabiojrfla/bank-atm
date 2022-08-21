@@ -9,7 +9,6 @@ class DepositsController < ApplicationController
     @deposit = Credit.new(credit_type: 'deposit', amount: integer_amount_to_cents,
                           bank_account: current_client.bank_account)
     if @deposit.save
-      BankCreditMaker.call(@deposit.bank_account, @deposit.amount)
       flash[:success] = 'Depósito realizado com sucesso.'
       redirect_to new_deposit_path
     else
