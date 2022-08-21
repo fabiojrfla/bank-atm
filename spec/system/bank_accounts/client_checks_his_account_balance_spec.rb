@@ -16,4 +16,17 @@ describe 'Client checks his bank account balance' do
     expect(page).to have_content 'R$ 1.000,00'
     expect(page).to have_link 'Voltar'
   end
+
+  it 'without having made transactions on his account' do
+    client = create(:client)
+
+    login_as client
+    visit root_path
+    click_on 'Saldo'
+
+    expect(current_path).to eq balance_bank_accounts_path
+    expect(page).to have_content 'Saldo'
+    expect(page).to have_content 'R$ 0,00'
+    expect(page).to have_link 'Voltar'
+  end
 end
