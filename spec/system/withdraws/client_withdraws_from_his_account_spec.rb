@@ -11,7 +11,7 @@ describe 'Client withdraws from his bank account' do
     fill_in 'Valor R$', with: '1000'
     click_on 'Sacar'
 
-    expect(current_path).to eq new_deposit_path
+    expect(current_path).to eq new_withdraw_path
     expect(page).to have_content 'Saque realizado com sucesso.'
     expect(page).to have_content 'Seu saldo: R$ 0,00'
   end
