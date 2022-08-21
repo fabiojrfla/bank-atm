@@ -6,4 +6,12 @@ class Credit < ApplicationRecord
   validates :amount, presence: true
   validates :amount, numericality: { greater_than_or_equal_to: 200, message: :greater_than_or_equal_to_integer_number }
 
+  after_create :credit_bank_account_balance
+
+  private
+
+  def credit_bank_account_balance
+    bank_account.balance += amount
+    bank_account.save!
+  end
 end

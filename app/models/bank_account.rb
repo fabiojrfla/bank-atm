@@ -8,7 +8,7 @@ class BankAccount < ApplicationRecord
   validates :agency_number, :account_number, numericality: { only_integer: true, greater_than: 0 }
   validates :balance, numericality: { greater_than_or_equal_to: 0 }
 
-  before_validation :generate_agency_and_account_numbers, on: :create
+  before_validation :generate_agency_and_account_numbers
 
   def real_balance
     balance.to_d / 100
