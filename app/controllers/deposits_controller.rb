@@ -12,7 +12,7 @@ class DepositsController < ApplicationController
       flash[:success] = 'Depósito realizado com sucesso.'
       redirect_to new_deposit_path
     else
-      @deposit.amount = 0
+      @deposit.amount = ''
       flash[:error] = 'Não foi possível realizar o depósito.'
       render 'new'
     end

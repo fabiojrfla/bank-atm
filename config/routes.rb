@@ -7,4 +7,5 @@ Rails.application.routes.draw do
     get '/balance', to: 'bank_accounts#balance', on: :collection
   end
   resources :deposits, only: %i[new create]
+  resources :withdraws, only: %i[new create]
 end

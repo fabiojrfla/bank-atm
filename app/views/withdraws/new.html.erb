@@ -1,10 +1,10 @@
 <section class="d-flex flex-column">
   <div class="d-flex m-auto shadow-lg p-5 flex-column">
-    <h2 class="mb-3">Deposite em sua conta</h2>
+    <h2 class="mb-3">Saque</h2>
     <p>Seu saldo: <%= number_to_currency(current_client.try(:bank_account).try(:real_balance)) %></p>
 
-    <%= form_with model: @deposit, url: deposits_path do |f| %>
-      <%= render 'error_messages', resource: @deposit %>
+    <%= form_with model: @withdraw, url: withdraws_path do |f| %>
+      <%= render 'error_messages', resource: @withdraw %>
 
       <div class="field form-floating">
         <%= f.number_field :amount, autofocus: true, autocomplete: 'amount', class: 'form-control mb-2', placeholder: ' ', step: 1 %>
@@ -12,7 +12,7 @@
       </div>
 
       <div class="actions">
-        <%= f.submit 'Depositar', class: 'w-100 btn btn-lg btn-primary fw-bolder mt-2' %>
+        <%= f.submit 'Sacar', class: 'w-100 btn btn-lg btn-primary fw-bolder mt-2' %>
       </div>
     <% end %>
 

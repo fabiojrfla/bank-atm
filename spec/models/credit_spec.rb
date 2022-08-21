@@ -21,4 +21,15 @@ RSpec.describe Credit, type: :model do
       end
     end
   end
+
+  describe 'methods' do
+    context '#credit_bank_account_balance' do
+      it 'credit the amount to the bank account' do
+        client = create(:client)
+        create(:credit, amount: 100_000, bank_account: client.bank_account)
+
+        expect(client.bank_account.real_balance).to eq 1_000
+      end
+    end
+  end
 end
