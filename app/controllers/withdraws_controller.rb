@@ -1,4 +1,6 @@
 class WithdrawsController < ApplicationController
+  before_action :authenticate_client!
+
   def new
     @withdraw = Debit.new
   end

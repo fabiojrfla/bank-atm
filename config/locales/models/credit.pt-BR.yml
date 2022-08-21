@@ -5,6 +5,3 @@ pt-BR:
     attributes:
       credit:
         amount: Valor R$
-  errors:
-    messages:
-      greater_than_or_equal_to_integer_number: deve ser maior ou igual a R$ 2
