@@ -3,7 +3,7 @@
     <h2 class="mb-3">Edite seus dados</h2>
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-      <%= render partial: 'client_registration_form', locals: { f: f } %>
+      <%= render 'client_registration_form', f: f %>
 
       <div class="row g-2 mb-2">
         <div class="field col-lg-6 form-floating">
