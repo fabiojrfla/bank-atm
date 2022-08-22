@@ -12,13 +12,13 @@ class Debit < ApplicationRecord
   private
 
   def check_bank_account_balance
-    return unless bank_account && amount > bank_account.balance
+    return unless bank_account && bank_account.balance < amount
 
     errors.add(:bank_account, :insufficient_balance)
   end
 
   def check_active_bank_account
-    return unless bank_account && bank_account.closed?
+    return unless bank_account&.closed?
 
     errors.add(:bank_account, :closed)
   end

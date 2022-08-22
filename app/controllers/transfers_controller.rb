@@ -26,7 +26,7 @@ class TransfersController < ApplicationController
   end
 
   def payee
-    return unless current_client && transfer_params[:payees_registration_number] != current_client.registration_number
+    return unless current_client&.registration_number != transfer_params[:payees_registration_number]
 
     Client.find_by(registration_number: transfer_params[:payees_registration_number])
   end
@@ -36,7 +36,7 @@ class TransfersController < ApplicationController
   end
 
   def check_payee
-    return if payee && payee.bank_account.active?
+    return if payee&.bank_account&.active?
 
     @transfer = Debit.new
     @transfer.errors.add(:client, 'não encontrado ou conta bancária encerrada')

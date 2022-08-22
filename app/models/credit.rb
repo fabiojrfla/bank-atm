@@ -12,7 +12,7 @@ class Credit < ApplicationRecord
   private
 
   def check_active_bank_account
-    return unless bank_account && bank_account.closed?
+    return unless bank_account&.closed?
 
     errors.add(:bank_account, :closed)
   end
