@@ -6,8 +6,7 @@ class WithdrawsController < ApplicationController
   end
 
   def create
-    @withdraw = Debit.new(debit_type: 'withdraw', amount: integer_amount_to_cents,
-                          bank_account: current_client.bank_account)
+    @withdraw = Debit.new(debit_type: 'withdraw', amount: amount, bank_account: current_client.bank_account)
     if @withdraw.save
       flash[:success] = 'Saque realizado com sucesso.'
       redirect_to new_withdraw_path
@@ -24,7 +23,7 @@ class WithdrawsController < ApplicationController
     params.require(:debit).permit(:amount)
   end
 
-  def integer_amount_to_cents
-    debit_params[:amount].to_d * 100
+  def amount
+    IntegerToCentsConverter.call(debit_params[:amount])
   end
 end

@@ -6,8 +6,7 @@ class DepositsController < ApplicationController
   end
 
   def create
-    @deposit = Credit.new(credit_type: 'deposit', amount: integer_amount_to_cents,
-                          bank_account: current_client.bank_account)
+    @deposit = Credit.new(credit_type: 'deposit', amount: amount, bank_account: current_client.bank_account)
     if @deposit.save
       flash[:success] = 'Depósito realizado com sucesso.'
       redirect_to new_deposit_path
@@ -24,7 +23,7 @@ class DepositsController < ApplicationController
     params.require(:credit).permit(:amount)
   end
 
-  def integer_amount_to_cents
-    credit_params[:amount].to_d * 100
+  def amount
+    IntegerToCentsConverter.call(credit_params[:amount])
   end
 end
