@@ -6,7 +6,7 @@ RSpec.describe Debit, type: :model do
   end
 
   describe 'debit_type' do
-    it { should define_enum_for(:debit_type).with_values(withdraw: 5) }
+    it { should define_enum_for(:debit_type).with_values(withdraw: 5, transfer: 10) }
   end
 
   describe 'validations' do
@@ -22,24 +22,39 @@ RSpec.describe Debit, type: :model do
     end
 
     context 'custom' do
-      it 'valid if bank account has sufficient balance' do
-        client = create(:client)
-        create(:credit, amount: 100_000, bank_account: client.bank_account)
-        debit = build(:debit, amount: 100_000, bank_account: client.bank_account)
+      describe '#check_bank_account_balance' do
+        it 'valid if bank account has sufficient balance' do
+          client = create(:client)
+          create(:credit, amount: 100_000, bank_account: client.bank_account)
+          debit = build(:debit, amount: 100_000, bank_account: client.bank_account)
 
-        debit.valid?
+          debit.valid?
 
-        expect(debit.errors[:bank_account]).to be_empty
+          expect(debit.errors[:bank_account]).to be_empty
+        end
+
+        it 'invalid if bank account does not have sufficient balance' do
+          client = create(:client)
+          create(:credit, amount: 100_000, bank_account: client.bank_account)
+          debit = build(:debit, amount: 150_000, bank_account: client.bank_account)
+
+          debit.valid?
+
+          expect(debit.errors[:bank_account]).to include('não possui saldo suficiente')
+        end
       end
 
-      it 'invalid if bank account does not have sufficient balance' do
-        client = create(:client)
-        create(:credit, amount: 100_000, bank_account: client.bank_account)
-        debit = build(:debit, amount: 150_000, bank_account: client.bank_account)
+      describe '#check_active_bank_account' do
+        it 'invalid if bank account is closed' do
+          client = create(:client)
+          create(:credit, amount: 100_000, bank_account: client.bank_account)
+          client.bank_account.closed!
+          debit = build(:debit, amount: 150_000, bank_account: client.bank_account)
 
-        debit.valid?
+          debit.valid?
 
-        expect(debit.errors[:bank_account]).to include('não possui saldo suficiente')
+          expect(debit.errors[:bank_account]).to include('encerrada')
+        end
       end
     end
   end
