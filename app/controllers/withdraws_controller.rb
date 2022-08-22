@@ -13,7 +13,7 @@ class WithdrawsController < ApplicationController
       redirect_to new_withdraw_path
     else
       @withdraw.amount = ''
-      flash[:error] = 'Não foi possível realizar o saque.'
+      flash.now[:error] = 'Não foi possível realizar o saque.'
       render 'new'
     end
   end

@@ -6,7 +6,7 @@ class BankAccountsController < ApplicationController
     if @bank_account.closed!
       flash[:success] = 'Conta bancária encerrada com sucesso.'
     else
-      flash[:error] = 'Algo deu errado.'
+      flash.now[:error] = 'Algo deu errado.'
     end
     redirect_to root_path
   end
@@ -15,7 +15,7 @@ class BankAccountsController < ApplicationController
     if @bank_account.active!
       flash[:success] = 'Conta bancária reativada com sucesso.'
     else
-      flash[:error] = 'Algo deu errado.'
+      flash.now[:error] = 'Algo deu errado.'
     end
     redirect_to root_path
   end
