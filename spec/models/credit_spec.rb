@@ -6,7 +6,7 @@ RSpec.describe Credit, type: :model do
   end
 
   describe 'credit_type' do
-    it { should define_enum_for(:credit_type).with_values(deposit: 5) }
+    it { should define_enum_for(:credit_type).with_values(deposit: 5, transfer: 10) }
   end
 
   describe 'validations' do
@@ -18,6 +18,18 @@ RSpec.describe Credit, type: :model do
       it do
         should validate_numericality_of(:amount).is_greater_than_or_equal_to(200)
                                                 .with_message('deve ser maior ou igual a R$ 2')
+      end
+    end
+
+    context 'custom' do
+      it 'invalid if bank account is closed' do
+        client = create(:client)
+        client.bank_account.closed!
+        credit = build(:credit, amount: 100_000, bank_account: client.bank_account)
+
+        credit.valid?
+
+        expect(credit.errors[:bank_account]).to include('encerrada')
       end
     end
   end

@@ -6,10 +6,7 @@
     <%= form_with model: @deposit, url: deposits_path do |f| %>
       <%= render 'error_messages', resource: @deposit %>
 
-      <div class="field form-floating">
-        <%= f.number_field :amount, autofocus: true, autocomplete: 'amount', class: 'form-control mb-2', placeholder: ' ', step: 1 %>
-        <%= f.label :amount %><br />
-      </div>
+      <%= render 'amount_field', f: f %>
 
       <div class="actions">
         <%= f.submit 'Depositar', class: 'w-100 btn btn-lg btn-primary fw-bolder mt-2' %>

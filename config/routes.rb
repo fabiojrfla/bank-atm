@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   end
   resources :deposits, only: %i[new create]
   resources :withdraws, only: %i[new create]
+  resources :transfers, only: %i[new create]
 end
