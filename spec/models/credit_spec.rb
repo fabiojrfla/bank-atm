@@ -40,7 +40,7 @@ RSpec.describe Credit, type: :model do
         client = create(:client)
         create(:credit, amount: 100_000, bank_account: client.bank_account)
 
-        expect(client.bank_account.real_balance).to eq 1_000
+        expect(client.bank_account.balance).to eq 100_000
       end
     end
   end

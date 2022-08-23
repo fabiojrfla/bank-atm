@@ -1,7 +1,7 @@
 class Debit < ApplicationRecord
   belongs_to :bank_account
 
-  enum debit_type: { withdraw: 5, transfer: 10 }
+  enum debit_type: { withdraw: 5, transfer: 10, fee: 15 }
 
   validates :amount, presence: true
   validates :amount, numericality: { greater_than_or_equal_to: 200, message: :greater_than_or_equal_to_integer_number }
