@@ -6,7 +6,7 @@ RSpec.describe Debit, type: :model do
   end
 
   describe 'debit_type' do
-    it { should define_enum_for(:debit_type).with_values(withdraw: 5, transfer: 10) }
+    it { should define_enum_for(:debit_type).with_values(withdraw: 5, transfer: 10, fee: 15) }
   end
 
   describe 'validations' do
@@ -66,7 +66,7 @@ RSpec.describe Debit, type: :model do
         create(:credit, amount: 100_000, bank_account: client.bank_account)
         create(:debit, amount: 50_000, bank_account: client.bank_account)
 
-        expect(client.bank_account.real_balance).to eq 500
+        expect(client.bank_account.balance).to eq 50_000
       end
     end
   end
