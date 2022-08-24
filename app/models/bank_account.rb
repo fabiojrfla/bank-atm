@@ -1,5 +1,7 @@
 class BankAccount < ApplicationRecord
   belongs_to :client
+  has_many :credits
+  has_many :debits
 
   enum status: { active: 5, closed: 10 }
 
@@ -11,7 +13,7 @@ class BankAccount < ApplicationRecord
   before_validation :generate_agency_and_account_numbers
 
   def real_balance
-    balance.to_d / 100
+    CentsToIntegerConverter.call(balance)
   end
 
   private

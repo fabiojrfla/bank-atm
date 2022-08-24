@@ -25,9 +25,14 @@
 
 <div class="row g-2 mb-2">
   <div class="col-lg-6">
-    <%= link_to 'Editar seus dados', edit_client_registration_path, class: 'btn btn-outline-primary py-2 w-100' %>
+    <%= link_to 'Extrato', statement_bank_accounts_path, class: 'btn btn-outline-primary py-2 w-100' %>
   </div>
 
+  <div class="col-lg-6">
+    <%= link_to 'Editar seus dados', edit_client_registration_path, class: 'btn btn-outline-primary py-2 w-100' %>
+  </div>
+</div>
+<div class="row g-2 mb-2">
   <div class="col-lg-6">
     <%= button_to 'Encerrar a minha conta',
                   bank_account_path(current_client.bank_account),
