@@ -21,12 +21,12 @@ class BankTransferFeeMaker < ApplicationService
 
   def business_hours
     datetime = DateTime.now.in_time_zone('Brasilia')
-    datetime.change(hour: 9, )..datetime.change(hour: 18)
+    datetime.change(hour: 9)..datetime.change(hour: 18)
   end
 
   def fee_calculator
-    datetime = DateTime.now
-    
+    datetime = DateTime.now.in_time_zone('Brasilia')
+
     @fee.amount += if datetime.on_weekday? && business_hours.cover?(datetime)
                      500
                    else
