@@ -32,7 +32,7 @@
           <tbody>
             <% @transactions.each_with_index do |transaction, i| %>
             <tr>
-              <td><%= l(transaction.created_at) %><%= transaction.created_at.localtime.strftime('%d/%m/%Y às %H:%M:%S') %></td>
+              <td><%= l(transaction.created_at.to_fs(:short)) %></td>
               <% if transaction.is_a?(Credit) %>
                 <td><%= t(transaction.credit_type) %></td>
                 <td id="credit-<%= i %>" class="table-success">
